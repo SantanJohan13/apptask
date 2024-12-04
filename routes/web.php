@@ -9,7 +9,6 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-use Illuminate\Support\Facades\Mail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,20 +62,4 @@ Route::middleware('auth')->group(function () {
         Route::get('/user_accounts/fetch_all', [UserController::class, 'fetch_all'])->name('user_accounts.fetch_all');
         Route::post('/user_accounts/change-role', [UserController::class, 'change_role'])->name('user_accounts.change_role');
     });
-});
-
-
-
-Route::get('/test-email', function () {
-    $details = [
-        'subject' => 'Test Email',
-        'body' => 'This is a test email sent from Laravel using Gmail SMTP.'
-    ];
-
-    Mail::raw($details['body'], function ($message) use ($details) {
-        $message->to('houetonelson@gmail.com') // Changez par l'adresse de test
-                ->subject($details['subject']);
-    });
-
-    return 'Email sent successfully!';
 });
